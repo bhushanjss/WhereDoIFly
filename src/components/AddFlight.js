@@ -13,7 +13,7 @@ class AddFlight extends Component<Props> {
    destinationDateTime: '', error: ''};
 
 	onButtonPress() {
-    console.log("Form Added");
+    console.log("Form Added is :" + this.state.title);
 	}
 
 
@@ -64,6 +64,11 @@ class AddFlight extends Component<Props> {
 				<Text style={styles.errorTextStyle}>
 					{this.state.error}
 				</Text>
+        <CardSection>
+          <Button onPress={this.onButtonPress.bind(this)}>
+            Add A Flight
+          </Button>
+        </CardSection>
 		</Card>
   );
 	}
