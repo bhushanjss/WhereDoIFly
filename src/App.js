@@ -9,11 +9,16 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Header } from './components/common';
+import AddFlight  from './components/AddFlight';
 
 export default class App extends Component<Props> {
   render() {
     return (
-      <Header headerText="Where Do I Fly?"/>
+      <View>
+        <Header headerText="Where Do I Fly?"/>
+        <AddFlight />
+      </View>
+
     );
   }
 }
