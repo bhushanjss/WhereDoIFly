@@ -3,17 +3,22 @@ import {
   Text
 } from 'react-native';
 
-import { Button, Card, CardSection, Input, Spinner } from './common';
+import { Button, Card, CardSection, Input } from './common';
 
 type Props = {};
 
 class AddFlight extends Component<Props> {
 
-  state = { title:'', orginAirportCity: '', destinationAirportCity: '', orginDateTime: '',
-   destinationDateTime: '', error: ''};
+  state = { title: '',
+  orginAirportCity: '',
+  destinationAirportCity: '',
+  orginDateTime: '',
+  destinationDateTime: '',
+  airline: '',
+  error: '' };
 
 	onButtonPress() {
-    console.log("Form Added is :" + this.state.title);
+    console.log(`Form Added is :${this.state.title}`);
 	}
 
 
@@ -60,7 +65,14 @@ class AddFlight extends Component<Props> {
 						onChangeText={destinationDateTime => this.setState({ destinationDateTime })}
 					/>
 				</CardSection>
-
+        <CardSection>
+					<Input
+						placeholder="Airline"
+						label="Airline"
+						value={this.state.airline}
+						onChangeText={airline => this.setState({ airline })}
+					/>
+				</CardSection>
 				<Text style={styles.errorTextStyle}>
 					{this.state.error}
 				</Text>

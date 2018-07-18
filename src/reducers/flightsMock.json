@@ -1,0 +1,29 @@
+[
+  {
+    "id": 0,
+    "title":"Chicago Flight",
+    "orginAirportCity": "Chicago",
+    "destinationAirportCity": "New Delhi",
+    "orginDateTime": "05/01/2018",
+    "destinationDateTime": "05/02/2018",
+    "airline": "Lufthansa"
+  },
+  {
+    "id": 1,
+    "title":"Chicago Flight",
+    "orginAirportCity": "Chicago",
+    "destinationAirportCity": "New Delhi",
+    "orginDateTime": "05/01/2018",
+    "destinationDateTime": "05/02/2018",
+    "airline": "Lufthansa"
+  },
+  {
+    "id": 2,
+    "title":"Chicago Flight",
+    "orginAirportCity": "Chicago",
+    "destinationAirportCity": "New Delhi",
+    "orginDateTime": "05/01/2018",
+    "destinationDateTime": "05/02/2018",
+    "airline": "Lufthansa"
+  }
+]
