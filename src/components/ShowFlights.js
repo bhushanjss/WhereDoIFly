@@ -5,7 +5,6 @@ import FlightItem from './FlightItem';
 
 class ShowFlights extends Component {
   renderItem(flight) {
-    console.log(flight);
     return <FlightItem flight={flight.item} />;
   }
 

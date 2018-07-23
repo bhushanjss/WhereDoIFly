@@ -22,10 +22,7 @@ export default class App extends Component {
       <Provider store={createStore(reducers)}>
         <View>
           <Header headerText="Where Do I Fly?" />
-          <View style={styles.container}>
-            <AddFlight />
-            <ShowFlights />
-          </View>
+          <ShowFlights />
         </View>
       </Provider>
     );
@@ -34,7 +31,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5FCFF',
-    height: 100
+    flex: 1,
+    backgroundColor: 'powderblue'
   }
 });
