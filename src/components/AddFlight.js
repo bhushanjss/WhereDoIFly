@@ -10,9 +10,9 @@ type Props = {};
 class AddFlight extends Component<Props> {
 
   state = { title: '',
-  orginAirportCity: '',
+  originAirportCity: '',
   destinationAirportCity: '',
-  orginDateTime: '',
+  originDateTime: '',
   destinationDateTime: '',
   airline: '',
   error: '' };
@@ -20,7 +20,6 @@ class AddFlight extends Component<Props> {
 	onButtonPress() {
     console.log(`Form Added is :${this.state.title}`);
 	}
-
 
 	render() {
 		return (
@@ -37,8 +36,8 @@ class AddFlight extends Component<Props> {
 					<Input
 						placeholder="Origin Aiport/City"
 						label="Origin Aiport/City"
-						value={this.state.orginAirportCity}
-						onChangeText={orginAirportCity => this.setState({ orginAirportCity })}
+						value={this.state.originAirportCity}
+						onChangeText={originAirportCity => this.setState({ originAirportCity })}
 					/>
 				</CardSection>
         <CardSection>
@@ -53,8 +52,8 @@ class AddFlight extends Component<Props> {
 					<Input
 						placeholder="Origin Date-Time"
 						label="Origin Date-Time"
-						value={this.state.orginDateTime}
-						onChangeText={orginDateTime => this.setState({ orginDateTime })}
+						value={this.state.originDateTime}
+						onChangeText={originDateTime => this.setState({ originDateTime })}
 					/>
 				</CardSection>
         <CardSection>
@@ -77,9 +76,7 @@ class AddFlight extends Component<Props> {
 					{this.state.error}
 				</Text>
         <CardSection>
-          <Button onPress={this.onButtonPress.bind(this)}>
-            Add A Flight
-          </Button>
+          <Button onPress={this.onButtonPress.bind(this)}>Add A Flight</Button>
         </CardSection>
 		</Card>
   );

@@ -14,6 +14,7 @@ import reducers from './reducers';
 
 import { Header } from './components/common';
 import AddFlight from './components/AddFlight';
+import ShowFlights from './components/ShowFlights';
 
 export default class App extends Component {
   render() {
@@ -23,6 +24,7 @@ export default class App extends Component {
           <Header headerText="Where Do I Fly?" />
           <View style={styles.container}>
             <AddFlight />
+            <ShowFlights />
           </View>
         </View>
       </Provider>
