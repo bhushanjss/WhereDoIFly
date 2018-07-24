@@ -22,7 +22,7 @@ export default class App extends Component {
       <Provider store={createStore(reducers)}>
         <View>
           <Header headerText="Where Do I Fly?" />
-          <ShowFlights />
+          <AddFlight />
         </View>
       </Provider>
     );

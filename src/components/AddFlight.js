@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
-import {
-  Text
-} from 'react-native';
+import { connect } from 'react-redux';
+import { Text } from 'react-native';
 
+
+import { titleChange, originAirportCityChange, destinationAirportCityChange,
+originDateTimeChange, destinationDateTimeChange, airlineChange } from '../actions';
 import { Button, Card, CardSection, Input } from './common';
 
-type Props = {};
 
-class AddFlight extends Component<Props> {
+class AddFlight extends Component {
 
-  state = { title: '',
-  originAirportCity: '',
-  destinationAirportCity: '',
-  originDateTime: '',
-  destinationDateTime: '',
-  airline: '',
-  error: '' };
-
-	onButtonPress() {
+  onButtonPress() {
     console.log(`Form Added is :${this.state.title}`);
 	}
 
+  titleChange(text) {
+    this.props.titleChange(text);
+  }
+
+  originAirportCityChange(text) {
+    this.props.originAirportCityChange(text);
+  }
+
+  destinationAirportCity(text) {
+    this.props.destinationAirportCityChange(text);
+  }
+
+  originDateTimeChange(text) {
+    this.props.originDateTimeChange(text);
+  }
+
+  destinationDateTime(text) {
+    this.props.destinationDateTimeChange(text);
+  }
+
+  airlineChange(text) {
+    this.props.airlineChange(text);
+  }
 	render() {
 		return (
 			<Card>
@@ -28,52 +44,46 @@ class AddFlight extends Component<Props> {
 					<Input
 						placeholder="Title"
 						label="Title"
-						value={this.state.title}
-						onChangeText={title => this.setState({ title })}
+						onChangeText={this.titleChange.bind(this)}
 					/>
 				</CardSection>
 				<CardSection>
 					<Input
 						placeholder="Origin Aiport/City"
 						label="Origin Aiport/City"
-						value={this.state.originAirportCity}
-						onChangeText={originAirportCity => this.setState({ originAirportCity })}
+						onChangeText={this.originAirportCityChange.bind(this)}
 					/>
 				</CardSection>
         <CardSection>
 					<Input
 						placeholder="Destination Aiport/City"
 						label="Destination Aiport/City"
-						value={this.state.destinationAirportCity}
-						onChangeText={destinationAirportCity => this.setState({ destinationAirportCity })}
+						onChangeText={this.destinationAirportCity.bind(this)}
 					/>
 				</CardSection>
         <CardSection>
 					<Input
 						placeholder="Origin Date-Time"
 						label="Origin Date-Time"
-						value={this.state.originDateTime}
-						onChangeText={originDateTime => this.setState({ originDateTime })}
+						onChangeText={this.originDateTimeChange.bind(this)}
 					/>
 				</CardSection>
         <CardSection>
 					<Input
 						placeholder="Destination Date-Time"
 						label="Destination Date-Time"
-						value={this.state.destinationDateTime}
-						onChangeText={destinationDateTime => this.setState({ destinationDateTime })}
+						onChangeText={this.destinationDateTime.bind(this)}
 					/>
 				</CardSection>
         <CardSection>
 					<Input
 						placeholder="Airline"
 						label="Airline"
-						value={this.state.airline}
-						onChangeText={airline => this.setState({ airline })}
+						onChangeText={this.airlineChange.bind(this)}
 					/>
 				</CardSection>
 				<Text style={styles.errorTextStyle}>
-					{this.state.error}
+          {this.title}
 				</Text>
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>Add A Flight</Button>
@@ -83,6 +93,11 @@ class AddFlight extends Component<Props> {
 	}
 }
 
+const mapStateToProps = state => ({
+    title: state.addFlightForm.title,
+    error: state.addFlightForm.error
+  });
+
 const styles = {
 	errorTextStyle: {
 		fontSize: 20,
@@ -91,4 +106,9 @@ const styles = {
 	}
 };
 
-export default AddFlight;
+export default connect(mapStateToProps, { titleChange,
+originAirportCityChange,
+destinationAirportCityChange,
+originDateTimeChange,
+destinationDateTimeChange,
+airlineChange })(AddFlight);
