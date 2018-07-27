@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import firebase from 'firebase';
-import reducers from './reducers';
+import * as firebase from 'firebase';
+import configureStore from './configureStore';
 
 import { Header } from './components/common';
 import LoginForm from './components/LoginForm';
 import AddFlight from './components/AddFlight';
 import ShowFlights from './components/ShowFlights';
 import fireBaseKey from '../secretkey';
+
+const store = configureStore();
 
 export default class App extends Component {
   componentWillMount() {
@@ -26,7 +26,6 @@ export default class App extends Component {
 }
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
         <View>
