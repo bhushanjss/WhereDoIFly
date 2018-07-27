@@ -30,7 +30,7 @@ export default class App extends Component {
       <Provider store={store}>
         <View>
           <Header headerText="Where Do I Fly?" />
-          <AddFlight />
+          <LoginForm />
         </View>
       </Provider>
     );

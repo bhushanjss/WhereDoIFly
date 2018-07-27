@@ -56,7 +56,7 @@ export const loginUser = ({ email, password }) => (
       dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
     ))
     .catch(error => (
-      dispatch({ error: LOGIN_USER_FAILED, payload: error })
+      dispatch({ type: LOGIN_USER_FAILED, payload: error })
     ))
   )
 );
