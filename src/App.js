@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import * as firebase from 'firebase';
 import configureStore from './configureStore';
 
-import { Header } from './components/common';
-import LoginForm from './components/LoginForm';
-import AddFlight from './components/AddFlight';
-import ShowFlights from './components/ShowFlights';
+import Router from './Router';
 import fireBaseKey from '../secretkey';
 
 const store = configureStore();
@@ -28,18 +25,10 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View>
-          <Header headerText="Where Do I Fly?" />
-          <LoginForm />
+        <View style={{ flex: 1 }}>
+          <Router />
         </View>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'powderblue'
-  }
-});

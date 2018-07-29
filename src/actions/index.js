@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
 import { TITLE_CHANGE, ORIGIN_AIRPORT_CITY_CHANGE,
   DESTINATION_AIRPORT_CITY_CHANGE, ORIGIN_DATE_TIME_CHANGE,
@@ -64,12 +65,8 @@ export const loginUser = ({ email, password }) => (
    (dispatch) => {
     dispatch({ type: LOGIN_USER });
     return firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(user => (
-      dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
-    ))
-    .catch(error => (
-      dispatch({ type: LOGIN_USER_FAILED, payload: error })
-    ));
+    .then(user => loginUserSuccess(dispatch, user))
+    .catch(error => loginUserFailed(dispatch, error));
   }
 );
 
@@ -77,11 +74,16 @@ export const createUser = ({ email, password }) => (
   (dispatch) => {
    dispatch({ type: CREATE_USER });
    firebase.auth().createUserWithEmailAndPassword(email, password)
-   .then(user => (
-     dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
-   ))
-   .catch(error => (
-     dispatch({ type: LOGIN_USER_FAILED, payload: error })
-   ));
+   .then(user => loginUserSuccess(dispatch, user))
+   .catch(error => loginUserFailed(dispatch, error));
  }
+);
+
+const loginUserSuccess = (dispatch, user) => {
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+  Actions.showFlights();
+};
+
+const loginUserFailed = (dispatch, error) => (
+  dispatch({ type: LOGIN_USER_FAILED, payload: error })
 );

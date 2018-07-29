@@ -33,7 +33,11 @@ export default (state = INITIAL_STATE, action) => {
         password: '',
         confirmPassword: '' };
     case TOGGLE_ACCOUNT:
-        return { ...state, showCreateUser: action.payload };
+        return { ...state,
+        showCreateUser: action.payload,
+        error: '',
+        password: '',
+        confirmPassword: '' };
     case RESET_LOGIN_FORM:
       return INITIAL_STATE;
     default:
