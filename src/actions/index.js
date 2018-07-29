@@ -6,7 +6,8 @@ import { TITLE_CHANGE, ORIGIN_AIRPORT_CITY_CHANGE,
   DESTINATION_DATE_TIME_CHANGE, AIRLINE_CHANGE, EMAIL_CHANGE,
   PASSWORD_CHANGE, CONFIRM_PASSWORD_CHANGE, RESET_LOGIN_FORM,
   LOGIN_USER_SUCCESS, LOGIN_USER_FAILED,
-  LOGIN_USER, CREATE_USER, TOGGLE_ACCOUNT } from './types';
+  LOGIN_USER, CREATE_USER, TOGGLE_ACCOUNT, ADD_FLIGHT,
+  ADD_FLIGHT_SUCCESS, ADD_FLIGHT_FAILED } from './types';
 
 
 //Add flight
@@ -86,4 +87,15 @@ const loginUserSuccess = (dispatch, user) => {
 
 const loginUserFailed = (dispatch, error) => (
   dispatch({ type: LOGIN_USER_FAILED, payload: error })
+);
+
+export const addFlight = (flightObj) => (
+  (dispatch) => {
+    const { currentUser } = firebase.auth();
+    dispatch({ type: ADD_FLIGHT });
+    firebase.database().ref(`/users/${currentUser.uid}/flights`)
+    .push(flightObj)
+    .then(() => dispatch({ type: ADD_FLIGHT_SUCCESS }))
+    .catch(error => dispatch({ type: ADD_FLIGHT_FAILED, payload: error }));
+  }
 );

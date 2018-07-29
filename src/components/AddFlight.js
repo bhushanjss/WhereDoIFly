@@ -4,14 +4,22 @@ import { Text } from 'react-native';
 
 
 import { titleChange, originAirportCityChange, destinationAirportCityChange,
-originDateTimeChange, destinationDateTimeChange, airlineChange } from '../actions';
+  originDateTimeChange, destinationDateTimeChange, airlineChange, addFlight
+} from '../actions';
 import { Button, Card, CardSection, Input } from './common';
 
 
 class AddFlight extends Component {
 
   onButtonPress() {
-    console.log(`Form Added is :${this.state.title}`);
+    const { title, originAirportCity, destinationAirportCity, originDateTime,
+      destinationDateTime, airline } = this.props;
+      this.props.addFlight({ title,
+      originAirportCity,
+      destinationAirportCity,
+      originDateTime,
+      destinationDateTime,
+      airline });
 	}
 
   titleChange(text) {
@@ -38,6 +46,8 @@ class AddFlight extends Component {
     this.props.airlineChange(text);
   }
 	render() {
+    const { title, originAirportCity, destinationAirportCity, originDateTime,
+      destinationDateTime, airline } = this.props;
 		return (
 			<Card>
 				<CardSection >
@@ -45,6 +55,7 @@ class AddFlight extends Component {
 						placeholder="Title"
 						label="Title"
 						onChangeText={this.titleChange.bind(this)}
+            value={title}
 					/>
 				</CardSection>
 				<CardSection>
@@ -52,6 +63,7 @@ class AddFlight extends Component {
 						placeholder="Origin Aiport/City"
 						label="Origin Aiport/City"
 						onChangeText={this.originAirportCityChange.bind(this)}
+            value={originAirportCity}
 					/>
 				</CardSection>
         <CardSection>
@@ -59,6 +71,7 @@ class AddFlight extends Component {
 						placeholder="Destination Aiport/City"
 						label="Destination Aiport/City"
 						onChangeText={this.destinationAirportCity.bind(this)}
+            value={destinationAirportCity}
 					/>
 				</CardSection>
         <CardSection>
@@ -66,6 +79,7 @@ class AddFlight extends Component {
 						placeholder="Origin Date-Time"
 						label="Origin Date-Time"
 						onChangeText={this.originDateTimeChange.bind(this)}
+            value={originDateTime}
 					/>
 				</CardSection>
         <CardSection>
@@ -73,6 +87,7 @@ class AddFlight extends Component {
 						placeholder="Destination Date-Time"
 						label="Destination Date-Time"
 						onChangeText={this.destinationDateTime.bind(this)}
+            value={destinationDateTime}
 					/>
 				</CardSection>
         <CardSection>
@@ -80,6 +95,7 @@ class AddFlight extends Component {
 						placeholder="Airline"
 						label="Airline"
 						onChangeText={this.airlineChange.bind(this)}
+            value={airline}
 					/>
 				</CardSection>
 				<Text style={styles.errorTextStyle}>
@@ -95,7 +111,13 @@ class AddFlight extends Component {
 
 const mapStateToProps = state => ({
     title: state.addFlightForm.title,
-    error: state.addFlightForm.error
+    error: state.addFlightForm.error,
+    originAirportCity: state.addFlightForm.originAirportCity,
+    destinationAirportCity: state.addFlightForm.destinationAirportCity,
+    originDateTime: state.addFlightForm.originDateTime,
+    destinationDateTime: state.addFlightForm.destinationDateTime,
+    airline: state.addFlightForm.airline,
+    loading: state.addFlightForm.loading
   });
 
 const styles = {
@@ -111,4 +133,5 @@ originAirportCityChange,
 destinationAirportCityChange,
 originDateTimeChange,
 destinationDateTimeChange,
-airlineChange })(AddFlight);
+airlineChange,
+addFlight })(AddFlight);

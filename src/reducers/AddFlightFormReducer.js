@@ -1,6 +1,7 @@
 import { TITLE_CHANGE, ORIGIN_AIRPORT_CITY_CHANGE,
   DESTINATION_AIRPORT_CITY_CHANGE, ORIGIN_DATE_TIME_CHANGE,
-  DESTINATION_DATE_TIME_CHANGE, AIRLINE_CHANGE } from '../actions/types';
+  DESTINATION_DATE_TIME_CHANGE, AIRLINE_CHANGE,
+  ADD_FLIGHT, ADD_FLIGHT_SUCCESS, ADD_FLIGHT_FAILED } from '../actions/types';
 
 const INITIAL_STATE =
 { title: '',
@@ -8,7 +9,8 @@ originAirportCity: '',
 destinationAirportCity: '',
 originDateTime: '',
 destinationDateTime: '',
-airline: ''
+airline: '',
+loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -26,6 +28,12 @@ export default (state = INITIAL_STATE, action) => {
         return { ...state, destinationDateTime: action.payload };
     case AIRLINE_CHANGE:
       return { ...state, airline: action.payload };
+    case ADD_FLIGHT:
+      return { ...state, loading: true };
+    case ADD_FLIGHT_SUCCESS:
+        return { ...state, loading: false };
+    case ADD_FLIGHT_FAILED:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
