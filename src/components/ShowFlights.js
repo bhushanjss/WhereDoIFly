@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { FlatList, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import FlightItem from './FlightItem';
 
 class ShowFlights extends Component {
+
+  navigateAddFlight() {
+    Actions.addFlight();
+  }
+
   renderItem(flight) {
     return <FlightItem flight={flight.item} />;
   }
@@ -30,6 +36,7 @@ class ShowFlights extends Component {
         borderRadius: 5
         }}
         containerStyle={{ marginTop: 20 }}
+        onPress={this.navigateAddFlight.bind(this)}
       />
       </View>
     );

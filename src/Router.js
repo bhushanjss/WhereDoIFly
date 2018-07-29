@@ -7,8 +7,8 @@ import ShowFlights from './components/ShowFlights';
 const RouterComponent = () => (
   <Router>
     <Scene key="root">
-      <Scene key="login" component={LoginForm} title="Please Login" initial />
-      <Scene key="showFlights" component={ShowFlights} title="Flights" />
+      <Scene key="login" component={LoginForm} title="Please Login" />
+      <Scene key="showFlights" component={ShowFlights} title="Flights" initial />
       <Scene key="addFlight" component={AddFlight} title="Add Flight" />
     </Scene>
   </Router>
