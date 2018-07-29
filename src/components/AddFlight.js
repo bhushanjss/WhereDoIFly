@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
+import { Button } from 'react-native-elements';
 
 
 import { titleChange, originAirportCityChange, destinationAirportCityChange,
   originDateTimeChange, destinationDateTimeChange, airlineChange, addFlight
 } from '../actions';
-import { Button, Card, CardSection, Input } from './common';
+import { Card, CardSection, Input } from './common';
 
 
 class AddFlight extends Component {
@@ -101,9 +102,21 @@ class AddFlight extends Component {
 				<Text style={styles.errorTextStyle}>
           {this.title}
 				</Text>
-        <CardSection>
-          <Button onPress={this.onButtonPress.bind(this)}>Add A Flight</Button>
-        </CardSection>
+        <Button
+          title='Add A Flight'
+          buttonStyle={{
+          height: 45,
+          borderWidth: 0,
+          borderRadius: 5,
+          alignSelf: 'stretch',
+          marginTop: 20,
+          marginBottom: 20
+          }}
+          loading={this.props.loading}
+          loadingProps={{ size: 'large' }}
+          containerStyle={{ marginTop: 20 }}
+          onPress={this.onButtonPress.bind(this)}
+        />
 		</Card>
   );
 	}
