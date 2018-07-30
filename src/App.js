@@ -12,14 +12,6 @@ const store = configureStore();
 export default class App extends Component {
   componentWillMount() {
   firebase.initializeApp(fireBaseKey);
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      this.setState({ loggedIn: true });
-    } else {
-      this.setState({ loggedIn: false });
-    }
-  });
 }
 
   render() {

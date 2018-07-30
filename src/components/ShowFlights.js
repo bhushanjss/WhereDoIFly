@@ -24,7 +24,6 @@ class ShowFlights extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource = ds.cloneWithRows(flights);
-    console.log(this.props);
   }
 
   navigateAddFlight() {
@@ -97,7 +96,6 @@ class ShowFlights extends Component {
 
 const mapStateToProps = state => {
 const flights = _.map(state.flights.values, (val, uid) => ({ ...val, uid }));
-console.log(flights);
 return {
   flights,
   loading: state.flights.loading,
