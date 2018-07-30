@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(state);
   switch (action.type) {
     case EMAIL_CHANGE:
       return { ...state, email: action.payload };

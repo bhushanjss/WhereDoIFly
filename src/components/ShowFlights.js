@@ -36,7 +36,7 @@ class ShowFlights extends Component {
   }
 
   renderList() {
-    if (this.props.showList) {
+    if (!this.props.showList) {
       const noFlightMsg = 'No Flights Selected. Please Add One';
       return (
         <View>
@@ -101,7 +101,8 @@ console.log(flights);
 return {
   flights,
   loading: state.flights.loading,
-  error: state.flights.error
+  error: state.flights.error,
+  showList: (flights.length > 0)
  };
 };
 

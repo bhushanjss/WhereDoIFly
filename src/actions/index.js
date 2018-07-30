@@ -2,13 +2,13 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
 import { TITLE_CHANGE, ORIGIN_AIRPORT_CITY_CHANGE,
-  DESTINATION_AIRPORT_CITY_CHANGE, ORIGIN_DATE_TIME_CHANGE,
-  DESTINATION_DATE_TIME_CHANGE, AIRLINE_CHANGE, EMAIL_CHANGE,
-  PASSWORD_CHANGE, CONFIRM_PASSWORD_CHANGE, RESET_LOGIN_FORM,
+  DESTINATION_AIRPORT_CITY_CHANGE, ORIGIN_DATE_TIME_CHANGE, ORIGIN_TIME_CHANGE,
+  DESTINATION_DATE_TIME_CHANGE, DESTINATION_TIME_CHANGE, AIRLINE_CHANGE, EMAIL_CHANGE,
+  NOTES_CHANGE, PASSWORD_CHANGE, CONFIRM_PASSWORD_CHANGE, RESET_LOGIN_FORM,
   LOGIN_USER_SUCCESS, LOGIN_USER_FAILED,
   LOGIN_USER, CREATE_USER, TOGGLE_ACCOUNT, ADD_FLIGHT,
-  ADD_FLIGHT_SUCCESS, ADD_FLIGHT_FAILED, LOAD_FLIGHT,
-  LOAD_FLIGHT_SUCCESS, LOAD_FLIGHT_FAILED } from './types';
+  ADD_FLIGHT_SUCCESS, LOAD_FLIGHT,
+  LOAD_FLIGHT_SUCCESS } from './types';
 
 
 //Add flight
@@ -28,13 +28,25 @@ export const originDateTimeChange = (text) => ({
     type: ORIGIN_DATE_TIME_CHANGE,
     payload: text
   });
+export const originTimeChange = (text) => ({
+  type: ORIGIN_TIME_CHANGE,
+  payload: text
+});
 export const destinationDateTimeChange = (text) => ({
   type: DESTINATION_DATE_TIME_CHANGE,
+  payload: text
+});
+export const destinationTimeChange = (text) => ({
+  type: DESTINATION_TIME_CHANGE,
   payload: text
 });
 export const airlineChange = (text) => ({
     type: AIRLINE_CHANGE,
     payload: text
+});
+export const notesChange = (text) => ({
+  type: NOTES_CHANGE,
+  payload: text
 });
 
 //Login Login Form

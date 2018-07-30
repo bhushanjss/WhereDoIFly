@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
 
 
 import { titleChange, originAirportCityChange, destinationAirportCityChange,
-  originDateTimeChange, destinationDateTimeChange, airlineChange, addFlight
+  originDateTimeChange, originTimeChange, destinationDateTimeChange,
+  destinationTimeChange, airlineChange, notesChange, addFlight
 } from '../actions';
 import { Card, CardSection, Input } from './common';
 
@@ -31,7 +33,7 @@ class AddFlight extends Component {
     this.props.originAirportCityChange(text);
   }
 
-  destinationAirportCity(text) {
+  destinationAirportCityChange(text) {
     this.props.destinationAirportCityChange(text);
   }
 
@@ -39,17 +41,31 @@ class AddFlight extends Component {
     this.props.originDateTimeChange(text);
   }
 
-  destinationDateTime(text) {
+  originTimeChange(text) {
+    this.props.originTimeChange(text);
+  }
+
+  destinationDateTimeChange(text) {
     this.props.destinationDateTimeChange(text);
+  }
+
+  destinationTimeChange(text) {
+    this.props.destinationTimeChange(text);
   }
 
   airlineChange(text) {
     this.props.airlineChange(text);
   }
+
+  notesChange(text) {
+    this.props.notesChange(text);
+  }
+
 	render() {
     const { title, originAirportCity, destinationAirportCity, originDateTime,
-      destinationDateTime, airline } = this.props;
+      originTime, destinationDateTime, destinationTime, airline, notes } = this.props;
 		return (
+      <ScrollView>
 			<Card>
 				<CardSection >
 					<Input
@@ -58,6 +74,14 @@ class AddFlight extends Component {
 						onChangeText={this.titleChange.bind(this)}
             value={title}
             editable={false}
+					/>
+				</CardSection>
+        <CardSection>
+					<Input
+						placeholder="Airline"
+						label="Airline"
+						onChangeText={this.airlineChange.bind(this)}
+            value={airline}
 					/>
 				</CardSection>
 				<CardSection>
@@ -72,32 +96,78 @@ class AddFlight extends Component {
 					<Input
 						placeholder="Destination Aiport/City"
 						label="Destination Aiport/City"
-						onChangeText={this.destinationAirportCity.bind(this)}
+						onChangeText={this.destinationAirportCityChange.bind(this)}
             value={destinationAirportCity}
 					/>
 				</CardSection>
         <CardSection>
-					<Input
-						placeholder="Origin Date-Time"
-						label="Origin Date-Time"
-						onChangeText={this.originDateTimeChange.bind(this)}
-            value={originDateTime}
-					/>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <Text style={{ fontSize: 8, paddingLeft: 5, paddingBottom: 10 }}>Origin Date-Time</Text>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+            <DatePicker
+            style={{ width: 200 }}
+            date={originDateTime}
+            mode="date"
+            format="YYYY-MM-DD"
+            maxDate={destinationDateTime}
+            confirmBtnText="Ok"
+            cancelBtnText="Cancel"
+            customStyles={{ dateIcon: { position: 'absolute', left: 0, marginLeft: 0 },
+              dateInput: { marginLeft: 100 } }}
+            onDateChange={(date) => this.originDateTimeChange(date)}
+            />
+            <DatePicker
+            style={{ width: 100 }}
+            date={originTime}
+            mode="time"
+            format="HH:mm A"
+            confirmBtnText="Ok"
+            cancelBtnText="Cancel"
+            customStyles={{ dateIcon: { display: 'none' },
+            dateInput: { marginLeft: 20 } }}
+            onDateChange={(time) => this.originTimeChange(time)}
+            />
+          </View>
+        </View>
+				</CardSection>
+        <CardSection>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <Text style={{ fontSize: 8, paddingLeft: 5 }}>Destination Date-Time</Text>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+            <DatePicker
+            style={{ width: 200 }}
+            date={destinationDateTime}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate={originDateTime}
+            confirmBtnText="Ok"
+            cancelBtnText="Cancel"
+            customStyles={{ dateIcon: { position: 'absolute', left: 0, marginLeft: 0 },
+              dateInput: { marginLeft: 100 } }}
+            onDateChange={(date) => this.destinationDateTimeChange(date)}
+            />
+            <DatePicker
+            style={{ width: 100 }}
+            date={destinationTime}
+            mode="time"
+            format="HH:mm A"
+            confirmBtnText="Ok"
+            cancelBtnText="Cancel"
+            customStyles={{ dateIcon: { display: 'none' },
+            dateInput: { marginLeft: 20 } }}
+            onDateChange={(time) => this.destinationTimeChange(time)}
+            />
+        </View>
+        </View>
 				</CardSection>
         <CardSection>
 					<Input
-						placeholder="Destination Date-Time"
-						label="Destination Date-Time"
-						onChangeText={this.destinationDateTime.bind(this)}
-            value={destinationDateTime}
-					/>
-				</CardSection>
-        <CardSection>
-					<Input
-						placeholder="Airline"
-						label="Airline"
-						onChangeText={this.airlineChange.bind(this)}
-            value={airline}
+						placeholder="Notes"
+						label="Notes"
+            multiline="true"
+						onChangeText={this.notesChange.bind(this)}
+            value={notes}
 					/>
 				</CardSection>
 				<Text style={styles.errorTextStyle}>
@@ -119,6 +189,7 @@ class AddFlight extends Component {
           onPress={this.onButtonPress.bind(this)}
         />
 		</Card>
+    </ScrollView>
   );
 	}
 }
@@ -130,7 +201,10 @@ const mapStateToProps = state => ({
     originAirportCity: state.addFlightForm.originAirportCity,
     destinationAirportCity: state.addFlightForm.destinationAirportCity,
     originDateTime: state.addFlightForm.originDateTime,
+    originTime: state.addFlightForm.originTime,
     destinationDateTime: state.addFlightForm.destinationDateTime,
+    destinationTime: state.addFlightForm.destinationTime,
+    notes: state.addFlightForm.notes,
     airline: state.addFlightForm.airline,
     loading: state.addFlightForm.loading
   });
@@ -147,6 +221,9 @@ export default connect(mapStateToProps, { titleChange,
 originAirportCityChange,
 destinationAirportCityChange,
 originDateTimeChange,
+originTimeChange,
 destinationDateTimeChange,
+destinationTimeChange,
 airlineChange,
+notesChange,
 addFlight })(AddFlight);
