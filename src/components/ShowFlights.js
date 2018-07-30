@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import FlightItem from './FlightItem';
 import { CardSection } from './common';
+import { loadFlights } from '../actions';
 
 class ShowFlights extends Component {
+
+  componentWillMount() {
+    this.props.loadFlights();
+    this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.createDataSource(nextProps);
+  }
+
+  createDataSource({ flights }) {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.dataSource = ds.cloneWithRows(flights);
+    console.log(this.props);
+  }
 
   navigateAddFlight() {
     Actions.addFlight();
@@ -17,7 +36,7 @@ class ShowFlights extends Component {
   }
 
   renderList() {
-    if (!this.props.showList) {
+    if (this.props.showList) {
       const noFlightMsg = 'No Flights Selected. Please Add One';
       return (
         <View>
@@ -76,6 +95,14 @@ class ShowFlights extends Component {
   }
 }
 
-const mapStateToProps = state => ({ flights: state.flights, showList: (state.flights.length > 0) });
+const mapStateToProps = state => {
+const flights = _.map(state.flights.values, (val, uid) => ({ ...val, uid }));
+console.log(flights);
+return {
+  flights,
+  loading: state.flights.loading,
+  error: state.flights.error
+ };
+};
 
-export default connect(mapStateToProps)(ShowFlights);
+export default connect(mapStateToProps, { loadFlights })(ShowFlights);

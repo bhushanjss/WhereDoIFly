@@ -57,6 +57,7 @@ class AddFlight extends Component {
 						label="Title"
 						onChangeText={this.titleChange.bind(this)}
             value={title}
+            editable={false}
 					/>
 				</CardSection>
 				<CardSection>
@@ -123,7 +124,8 @@ class AddFlight extends Component {
 }
 
 const mapStateToProps = state => ({
-    title: state.addFlightForm.title,
+    title: state.addFlightForm.title || (`${state.addFlightForm.originAirportCity
+    } - ${state.addFlightForm.destinationAirportCity}`),
     error: state.addFlightForm.error,
     originAirportCity: state.addFlightForm.originAirportCity,
     destinationAirportCity: state.addFlightForm.destinationAirportCity,

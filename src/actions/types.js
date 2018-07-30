@@ -19,3 +19,8 @@ export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAILED = 'login_user_failed';
 export const CREATE_USER = 'create_user';
 export const TOGGLE_ACCOUNT = 'toggle_account';
+
+//show Flights
+export const LOAD_FLIGHT = 'load_flight';
+export const LOAD_FLIGHT_SUCCESS = 'load_flight_success';
+export const LOAD_FLIGHT_FAILED = 'load_flight_failed';

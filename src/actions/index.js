@@ -7,7 +7,8 @@ import { TITLE_CHANGE, ORIGIN_AIRPORT_CITY_CHANGE,
   PASSWORD_CHANGE, CONFIRM_PASSWORD_CHANGE, RESET_LOGIN_FORM,
   LOGIN_USER_SUCCESS, LOGIN_USER_FAILED,
   LOGIN_USER, CREATE_USER, TOGGLE_ACCOUNT, ADD_FLIGHT,
-  ADD_FLIGHT_SUCCESS, ADD_FLIGHT_FAILED } from './types';
+  ADD_FLIGHT_SUCCESS, ADD_FLIGHT_FAILED, LOAD_FLIGHT,
+  LOAD_FLIGHT_SUCCESS, LOAD_FLIGHT_FAILED } from './types';
 
 
 //Add flight
@@ -82,7 +83,7 @@ export const createUser = ({ email, password }) => (
 
 const loginUserSuccess = (dispatch, user) => {
   dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
-  Actions.showFlights();
+  Actions.showFlights({ type: 'reset' });
 };
 
 const loginUserFailed = (dispatch, error) => (
@@ -95,7 +96,19 @@ export const addFlight = (flightObj) => (
     dispatch({ type: ADD_FLIGHT });
     firebase.database().ref(`/users/${currentUser.uid}/flights`)
     .push(flightObj)
-    .then(() => dispatch({ type: ADD_FLIGHT_SUCCESS }))
-    .catch(error => dispatch({ type: ADD_FLIGHT_FAILED, payload: error }));
+    .on('value', snapshot => {
+      dispatch({ type: ADD_FLIGHT_SUCCESS, payload: snapshot.val() });
+    });
+  }
+);
+
+export const loadFlights = () => (
+  (dispatch) => {
+    const { currentUser } = firebase.auth();
+    dispatch({ type: LOAD_FLIGHT });
+    firebase.database().ref(`/users/${currentUser.uid}/flights`)
+    .on('value', snapshot => (
+      dispatch({ type: LOAD_FLIGHT_SUCCESS, payload: snapshot.val() })
+    ));
   }
 );

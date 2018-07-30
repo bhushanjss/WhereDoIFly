@@ -14,7 +14,6 @@ loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
     case TITLE_CHANGE:
       return { ...state, title: action.payload };
@@ -31,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_FLIGHT:
       return { ...state, loading: true };
     case ADD_FLIGHT_SUCCESS:
-        return { ...state, loading: false };
+        return INITIAL_STATE;
     case ADD_FLIGHT_FAILED:
       return { ...state, loading: false, error: action.payload };
     default:
