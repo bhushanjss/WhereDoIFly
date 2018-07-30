@@ -66,7 +66,7 @@ class ShowFlights extends Component {
       <FlatList
       data={this.props.flights}
       renderItem={this.renderItem}
-      keyExtractor={flight => flight.id}
+      keyExtractor={flight => flight.uid}
       />
       <Button
         title='Add'

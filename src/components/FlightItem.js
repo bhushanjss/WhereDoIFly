@@ -7,7 +7,7 @@ class FlightItem extends Component {
 
 render() {
   const { title, originAirportCity, destinationAirportCity, originDateTime,
-    destinationDateTime, airline } = this.props.flight;
+    originTime, destinationDateTime, destinationTime, airline, notes } = this.props.flight;
 
   return (
     <View>
@@ -25,11 +25,11 @@ render() {
       <View style={styles.flightsView}>
         <View>
           <Text>Departed {originAirportCity}</Text>
-          <Text>{originDateTime}</Text>
+          <Text>{originDateTime} {originTime}</Text>
         </View>
         <View>
           <Text>Arrived {destinationAirportCity}</Text>
-          <Text>{destinationDateTime}</Text>
+          <Text>{destinationDateTime} {destinationTime}</Text>
         </View>
       </View>
       </CardSection>

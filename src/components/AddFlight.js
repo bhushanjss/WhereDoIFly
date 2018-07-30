@@ -15,14 +15,17 @@ import { Card, CardSection, Input } from './common';
 class AddFlight extends Component {
 
   onButtonPress() {
-    const { title, originAirportCity, destinationAirportCity, originDateTime,
-      destinationDateTime, airline } = this.props;
+    const { title, originAirportCity, destinationAirportCity, originDateTime, originTime,
+      destinationDateTime, destinationTime, airline, notes } = this.props;
       this.props.addFlight({ title,
       originAirportCity,
       destinationAirportCity,
       originDateTime,
+      originTime,
       destinationDateTime,
-      airline });
+      destinationTime,
+      airline,
+      notes });
 	}
 
   titleChange(text) {
